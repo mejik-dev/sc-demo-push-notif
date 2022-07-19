@@ -1,22 +1,42 @@
+import { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 
 export const usePushNotification = () => {
-  const PLAYER_ID_MUTATION = gql`
-    mutation {
-      sendPushNotification(input: { contents: "This is Push Notification" }) {
+  const SEND_PUSH_MUTATION = gql`
+    mutation sendPushNotification($input: PushNotificationInput!) {
+      sendPushNotification(input: $input) {
         message
       }
     }
   `;
 
-  const [formPushNotif, { data, loading, error }] =
-    useMutation(PLAYER_ID_MUTATION);
+  const [content, setContent] = useState("");
+
+  const [sendPushNotif, { data, loading, error }] =
+    useMutation(SEND_PUSH_MUTATION);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await sendPushNotif({
+        variables: {
+          input: { contents: content },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      alert("Failed");
+    }
+  };
 
   return {
-    PLAYER_ID_MUTATION,
+    SEND_PUSH_MUTATION,
     loading,
     error,
     data,
-    formPushNotif,
+    setContent,
+    sendPushNotif,
+    handleSubmit,
   };
 };
