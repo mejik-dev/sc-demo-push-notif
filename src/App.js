@@ -3,8 +3,7 @@ import "./App.css";
 import { usePushNotification } from "./hooks/usePushNotification";
 
 function App() {
-  const { loading, error, data, setContent, handleSubmit } =
-    usePushNotification();
+  const { loading, error, setContent, handleSubmit } = usePushNotification();
 
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;

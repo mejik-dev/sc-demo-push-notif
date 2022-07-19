@@ -12,8 +12,7 @@ export const usePushNotification = () => {
 
   const [content, setContent] = useState("");
 
-  const [sendPushNotif, { data, loading, error }] =
-    useMutation(SEND_PUSH_MUTATION);
+  const [sendPushNotif, { loading, error }] = useMutation(SEND_PUSH_MUTATION);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +33,6 @@ export const usePushNotification = () => {
     SEND_PUSH_MUTATION,
     loading,
     error,
-    data,
     setContent,
     sendPushNotif,
     handleSubmit,
