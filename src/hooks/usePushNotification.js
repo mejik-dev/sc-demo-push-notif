@@ -23,6 +23,7 @@ export const usePushNotification = () => {
           input: { contents: content },
         },
       });
+      setContent("");
     } catch (error) {
       console.log(error);
       alert("Failed");
