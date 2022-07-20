@@ -1,3 +1,4 @@
+import OneSignal from "react-onesignal";
 import React from "react";
 import "./App.css";
 import { usePushNotification } from "./hooks/usePushNotification";
@@ -7,6 +8,12 @@ function App() {
 
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
+
+  useEffect(() => {
+    OneSignal.init({
+      appId: "82a08a59-6b98-41f5-8464-525d1193faf6",
+    });
+  }, []);
 
   return (
     <div className="container">
